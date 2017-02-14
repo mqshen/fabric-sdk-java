@@ -82,7 +82,7 @@ public class ProposalBuilder {
         ChaincodeHeaderExtension.Builder chaincodeHeaderExtension = ChaincodeHeaderExtension.newBuilder();
 
 
-        chaincodeHeaderExtension.setChaincodeID(chaincodeID);
+        chaincodeHeaderExtension.setChaincodeId(chaincodeID);
 
 
         ChainHeader chainHeader = createChainHeader(HeaderType.ENDORSER_TRANSACTION,
@@ -137,7 +137,7 @@ public class ProposalBuilder {
 
         chaincodeSpecBuilder.setType(langType);
 
-        chaincodeSpecBuilder.setChaincodeID(chainCodeId);
+        chaincodeSpecBuilder.setChaincodeId(chainCodeId);
 
         Chaincode.ChaincodeInput chaincodeInput = Chaincode.ChaincodeInput.newBuilder().addAllArgs(args).build();
 

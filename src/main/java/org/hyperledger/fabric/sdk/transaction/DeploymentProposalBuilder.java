@@ -170,7 +170,7 @@ public class DeploymentProposalBuilder extends ProposalBuilder {
 
 
         Chaincode.ChaincodeDeploymentSpec depspec = createDeploymentSpec(ccType,
-                chaincodeName, argList, data, null);
+                chaincodeName, argList, data, chaincodeDir, "1.0");
 
 
         List<ByteString> argList = new ArrayList<>();
@@ -192,7 +192,7 @@ public class DeploymentProposalBuilder extends ProposalBuilder {
 
 
         Chaincode.ChaincodeDeploymentSpec depspec = createDeploymentSpec(Chaincode.ChaincodeSpec.Type.GOLANG,
-                chaincodeName, argList, null, null);
+                chaincodeName, argList, null, null, null);
 
         Chaincode.ChaincodeID lcccID = Chaincode.ChaincodeID.newBuilder().setName(LCCC_CHAIN_NAME).build();
 
@@ -213,12 +213,17 @@ public class DeploymentProposalBuilder extends ProposalBuilder {
                                                                    String name,
                                                                    List<String> args,
                                                                    byte[] codePackage,
-                                                                   String chaincodePath) {
+                                                                   String chaincodePath,
+                                                                   String chaincodeVersion) {
+
         logger.trace("Creating deployment Specification.");
 
         Chaincode.ChaincodeID.Builder chaincodeIDBuilder = Chaincode.ChaincodeID.newBuilder().setName(name);
         if (chaincodePath != null) {
             chaincodeIDBuilder = chaincodeIDBuilder.setPath(chaincodePath);
+        }
+        if (chaincodeVersion != null) {
+            chaincodeIDBuilder = chaincodeIDBuilder.setVersion(chaincodeVersion);
         }
 
         Chaincode.ChaincodeID chaincodeID = chaincodeIDBuilder.build();
@@ -232,7 +237,7 @@ public class DeploymentProposalBuilder extends ProposalBuilder {
         Chaincode.ChaincodeInput chaincodeInput = Chaincode.ChaincodeInput.newBuilder().addAllArgs(argList).build();
 
         // Construct the ChaincodeSpec
-        Chaincode.ChaincodeSpec chaincodeSpec = Chaincode.ChaincodeSpec.newBuilder().setType(ccType).setChaincodeID(chaincodeID)
+        Chaincode.ChaincodeSpec chaincodeSpec = Chaincode.ChaincodeSpec.newBuilder().setType(ccType).setChaincodeId(chaincodeID)
                 .setInput(chaincodeInput)
                 .build();
 

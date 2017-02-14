@@ -128,7 +128,7 @@ public class ProposalResponse extends ChainCodeResponse {
             ByteString deps = cci.getArgs(2);
             Chaincode.ChaincodeDeploymentSpec chaincodeDeploymentSpec = Chaincode.ChaincodeDeploymentSpec
                             .parseFrom(deps.toByteArray());
-            chaincodeID = chaincodeDeploymentSpec.getChaincodeSpec().getChaincodeID();
+            chaincodeID = chaincodeDeploymentSpec.getChaincodeSpec().getChaincodeId();
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
         }
